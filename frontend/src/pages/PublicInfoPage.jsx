@@ -27,7 +27,7 @@ const sections = {
             ['Security', 'OAuth access and refresh tokens are encrypted at rest. Application passwords and machine API keys are hashed. Production traffic uses HTTPS, provider credentials are not exposed to the browser after OAuth, and reporting bots have read-only access with no campaign write routes.'],
             ['Retention and deletion', `Advertising connection data is retained while the connection is active and needed to provide the service. An operator can disconnect an account in ${APP_NAME}. Users may also revoke access in their Google Account permissions. To request deletion of account data or OAuth credentials, contact the address below; verified requests are processed within 30 days.`],
             ['Sharing and processors', 'We share data only with infrastructure providers needed to operate the service or when required by law. We do not allow those providers to use Google user data for independent advertising purposes.'],
-            ['Contact', `Privacy and data deletion requests: didik.w.yudi@gmail.com. Operator: ${APP_OPERATOR}, Banguntapan, Bantul, Indonesia.`],
+            ['Contact', `Privacy and data deletion requests: privacy@your-domain.example. Operator: ${APP_OPERATOR}.`],
         ],
     },
     terms: {
@@ -40,7 +40,7 @@ const sections = {
             ['Prohibited use', 'Users may not bypass access controls, connect accounts without authorization, extract credentials, resell provider data, automate abusive activity, or use the platform to violate advertising-provider policies.'],
             ['Availability and changes', 'The service depends on third-party advertising APIs and may be interrupted by provider outages, account restrictions, policy changes, or access-level reviews. Features may be changed to preserve security, compliance, or provider compatibility.'],
             ['Suspension and termination', 'Access may be suspended when an account is compromised, authorization is withdrawn, policies are violated, or continued operation could harm a client, provider, or the platform.'],
-            ['Contact', `Questions about these terms: didik.w.yudi@gmail.com. Operator: ${APP_OPERATOR}, Banguntapan, Bantul, Indonesia.`],
+            ['Contact', `Questions about these terms: privacy@your-domain.example. Operator: ${APP_OPERATOR}.`],
         ],
     },
 };

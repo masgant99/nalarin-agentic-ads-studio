@@ -1,4 +1,4 @@
-# Standalone production stack for ads.nalar.army (Sprint 4 wires this into
+# Standalone production stack (per-deployment; wires into
 # Caddy + cloudflared, port 3024 per PROJECT_BRIEF).
 #
 # Deliberately NOT an overlay on docker-compose.yml (the dev file) — Docker
@@ -8,7 +8,7 @@
 # file removes that entire class of bug at the cost of a little duplication.
 #
 # Run with an isolated compose project name so its network/volumes never
-# collide with nalarin-postgres or MedSos's Postgres:
+# collide with any other local Postgres:
 #
 #   docker compose -p ads-studio-prod -f docker-compose.prod.yml up -d
 #

@@ -2,7 +2,7 @@
 
 // White-label accent: VITE_APP_ACCENT (hex, e.g. #1877F2) at build time
 // recolors every `amber-*` utility in one shot — no component edits needed.
-// Defaults to the Nalarin amber so the current instance is unchanged.
+// Neutral default accent; override via VITE_APP_ACCENT.
 function hexToRgb(hex) {
   const clean = hex.replace('#', '');
   const full = clean.length === 3 ? clean.split('').map((c) => c + c).join('') : clean;

@@ -1,6 +1,6 @@
 """Pure helpers for the Google Ads OAuth flow. Ported from the working
 TypeScript implementation at apps/optima/lib/google-ads-oauth.ts in the
-nalarin monorepo (same shape, adapted to Python/httpx). State/CSRF handling
+a prior project (same shape, adapted to Python/httpx). State/CSRF handling
 uses the shared app.core.oauth_state (not a bespoke encrypted-state cookie
 like the TS version) since that's the mechanism Sprint 0 built for every
 platform's OAuth flow to share.

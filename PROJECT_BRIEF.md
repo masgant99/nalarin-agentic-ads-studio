@@ -128,7 +128,7 @@ here only so the plan structure stays compatible with the orchestration skill.
 | 1 | Google Ads integration (read-only: OAuth + campaign/ad performance) | ✅ Implemented; OAuth verified end-to-end |
 | 2 | Google Ads write actions + cross-platform Overview page | ✅ Implemented; preview + explicit confirmation safety guard |
 | 3 | TikTok Ads integration (research + read + write) | ✅ Implemented fail-closed; awaiting TikTok developer app approval |
-| 4 | Deploy to `ads.nalar.army` (Docker/Caddy/cloudflared) + **required** Hermes Telegram bot (`ads-studio-agent`) | 🟨 Site live; read-only bot API/profile ready, awaiting dedicated BotFather token |
+| 4 | Deploy to `ads.nalar.army` (Docker/Caddy/cloudflared) + ~~required Hermes Telegram bot (`ads-studio-agent`)~~ | ✅ Site live; ~~read-only bot API/profile ready, awaiting dedicated BotFather token~~ — SUPERSEDED: memakai bot Telegram yang ada (tidak bikin bot baru) |
 | 5 | Hardening: tests, security review, docs, handoff | ✅ Code/tests/docs completed; external provider prerequisites remain |
 
 ## 8. Current State
@@ -140,10 +140,7 @@ Google consent and persists encrypted OAuth tokens, but the currently connected
 customer reports `CUSTOMER_NOT_ENABLED` until Google API/developer-token/account
 access is enabled. TikTok OAuth/reporting/campaign implementation is present but
 intentionally returns a clear unconfigured response until a TikTok for Business
-developer app receives Marketing API approval. The dedicated `ads-studio-agent`
-Hermes profile is isolated from MedSos/GitHub credentials and has an owner-bound
-`ads:read` key only; its live API reports `can_spend=false` and exposes no write
-route. It awaits a dedicated BotFather token before its Telegram gateway starts.
+developer app receives Marketing API approval. Bot operasional menggunakan bot Hermes existing (optima-ads-agent) via scoped `ads:read` key; tidak membuat bot/profile terpisah.
 
 ## 9. Security Rules
 

@@ -5,6 +5,7 @@ import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Resp
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
 import PerformanceTable from '../components/PerformanceTable';
+import OptimizationPanel from '../components/OptimizationPanel';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api/v1';
 
@@ -102,6 +103,8 @@ export default function Overview() {
                     ))}
                 </div>
             )}
+
+            <OptimizationPanel />
 
             {!loading && spendByPlatform.length > 0 && (
                 <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">

@@ -554,3 +554,25 @@ class TikTokAdsConnection(Base):
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
 
     user = relationship("User")
+
+
+class MutationAudit(Base):
+    """Immutable audit trail for every optimization mutation decision —
+    auto-mode verdicts, manual approvals, previews, and rejections. Written
+    by the auto-mode scheduler and the optimization endpoints; never updated."""
+    __tablename__ = "mutation_audits"
+
+    id = Column(String, primary_key=True, default=generate_uuid)
+    user_id = Column(String, ForeignKey("users.id", ondelete="CASCADE"), nullable=True)
+    provider = Column(String, nullable=False)          # meta / google / tiktok
+    account_id = Column(String, nullable=False)
+    action = Column(String, nullable=False)            # campaign.pause / budget.update / ...
+    campaign_id = Column(String, nullable=True)
+    payload_hash = Column(String, nullable=False)      # canonical sha256
+    mode = Column(String, nullable=False)              # auto / manual / preview / rejected
+    verdict_reason = Column(String, nullable=True)     # policy reason or 'policy-pass'
+    executed = Column(Boolean, default=False)          # did a real mutation happen
+    metrics = Column(JSON, nullable=True)              # snapshot: spend/cpa/ctr at decision time
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    user = relationship("User")

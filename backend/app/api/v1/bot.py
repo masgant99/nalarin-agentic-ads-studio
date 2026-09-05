@@ -51,6 +51,31 @@ def safety_policy(_api_key: ApiKey = Depends(require_api_key_scope("ads:read")))
     }
 
 
+@router.get("/spend")
+async def read_spend(
+    date_preset: str = "last_7d",
+    api_key: ApiKey = Depends(require_api_key_scope("ads:read")),
+    db: Session = Depends(get_db),
+):
+    """Get aggregated total spend across all connected platforms for the bot."""
+    if not api_key.created_by_user_id:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="This API key is not bound to an owner.",
+        )
+    
+    overview_data = await build_overview(db, api_key.created_by_user_id, date_preset)
+    
+    total_spend = sum(float(campaign.get("spend", 0.0) or 0.0) for campaign in overview_data)
+    
+    return {
+        "date_preset": date_preset,
+        "total_spend": round(total_spend, 2),
+        "currency": "USD",
+        "active_campaigns": len([c for c in overview_data if str(c.get("status", "")).upper() == "ENABLED"])
+    }
+
+
 @router.get("/overview")
 async def read_overview(
     date_preset: str = "last_30d",

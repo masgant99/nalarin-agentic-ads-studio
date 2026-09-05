@@ -174,3 +174,8 @@ def mock_facebook_service(client):
     # Clean up the override
     if get_facebook_service in app.dependency_overrides:
         del app.dependency_overrides[get_facebook_service]
+import pytest
+
+@pytest.fixture
+def anyio_backend():
+    return 'asyncio'

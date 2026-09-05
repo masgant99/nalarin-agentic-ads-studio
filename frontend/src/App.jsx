@@ -1,10 +1,8 @@
 /**
- * Facebook Ad Builder - Frontend
+ * Agentic Ads Studio - Frontend
  *
- * Created by Jason Akatiff
- * iSCALE.com | A4D.com
- * Telegram: @jasonakatiff
- * Email: jason@jasonakatiff.com
+ * Created by Didik Wahyudi
+ * Agentic Ads Studio
  */
 
 import React from 'react';

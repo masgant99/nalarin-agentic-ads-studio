@@ -1,12 +1,10 @@
 #!/bin/bash
 #
-# Facebook Ad Builder - Interactive Setup Script
+# Agentic Ads Studio - Interactive Setup Script
 # This script walks you through setting up the application
 #
-# Created by Jason Akatiff
-# iSCALE.com | A4D.com
-# Telegram: @jasonakatiff
-# Email: jason@jasonakatiff.com
+# Created by Didik Wahyudi
+# Agentic Ads Studio
 #
 
 set -e
@@ -108,12 +106,12 @@ echo ""
 echo -e "${BOLD}${CYAN}"
 echo "  ╔═══════════════════════════════════════════════════════════╗"
 echo "  ║                                                           ║"
-echo "  ║          🚀 Facebook Ad Builder Setup Wizard 🚀           ║"
+echo "  ║          🚀 Agentic Ads Studio Setup Wizard 🚀           ║"
 echo "  ║                                                           ║"
 echo "  ╚═══════════════════════════════════════════════════════════╝"
 echo -e "${NC}"
 echo ""
-echo "  This wizard will help you set up the Facebook Ad Builder."
+echo "  This wizard will help you set up the Agentic Ads Studio."
 echo "  It will check prerequisites, configure environment variables,"
 echo "  and initialize the database."
 echo ""

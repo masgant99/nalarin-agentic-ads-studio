@@ -1,6 +1,6 @@
 # Railway Deployment Guide
 
-This guide walks you through deploying the Facebook Ad Builder to Railway.
+This guide walks you through deploying the Agentic Ads Studio to Railway.
 
 ## Overview
 

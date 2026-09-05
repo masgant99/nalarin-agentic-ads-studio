@@ -13,7 +13,7 @@ command -v agent-browser >/dev/null || echo "WARNING: agent-browser not installe
 
 ## Project Overview
 
-Facebook Ad Automation App - A full-stack application for automating the lifecycle of Facebook video and image ads, from competitor research to ad creation, launching, and performance reporting.
+Agentic Ads Studio - A full-stack application for automating the lifecycle of Facebook video and image ads, from competitor research to ad creation, launching, and performance reporting.
 
 **Tech Stack:**
 - Frontend: React 19 + Vite + TailwindCSS

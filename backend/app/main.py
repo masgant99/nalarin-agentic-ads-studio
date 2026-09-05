@@ -1,10 +1,7 @@
 """
-Facebook Ad Builder - Backend API
+Agentic Ads Studio - Backend API
 
-Created by Jason Akatiff
-iSCALE.com | A4D.com
-Telegram: @jasonakatiff
-Email: jason@jasonakatiff.com
+Created by Didik Wahyudi
 """
 
 import os

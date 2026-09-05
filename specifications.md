@@ -1,7 +1,7 @@
-# Facebook Ad Automation App - Architecture Specifications
+# Agentic Ads Studio - Architecture Specifications
 
 ## 1. Overview
-This document serves as the Source of Truth for the Facebook Ad Automation App. The application is designed to automate the lifecycle of Facebook video ads, from competitor research to ad creation, launching, and performance reporting.
+This document serves as the Source of Truth for the Agentic Ads Studio. The application is designed to automate the lifecycle of Facebook video ads, from competitor research to ad creation, launching, and performance reporting.
 
 ## 2. Tech Stack
 

@@ -11,6 +11,21 @@ router = APIRouter()
 
 # Security: Define allowed file types and size limits
 ALLOWED_IMAGE_EXTENSIONS = {'.jpg', '.jpeg', '.png', '.gif', '.webp'}
+
+
+def _looks_like_image(content: bytes) -> bool:
+    """Magic-byte sniff for the allowed image formats (extension alone is spoofable)."""
+    if len(content) < 12:
+        return False
+    if content[:3] == b'\xff\xd8\xff':            # jpg/jpeg
+        return True
+    if content[:8] == b'\x89PNG\r\n\x1a\n':        # png
+        return True
+    if content[:6] in (b'GIF87a', b'GIF89a'):      # gif
+        return True
+    if content[:4] == b'RIFF' and content[8:12] == b'WEBP':  # webp
+        return True
+    return False
 ALLOWED_VIDEO_EXTENSIONS = {'.mp4', '.mov', '.avi', '.webm'}
 ALLOWED_EXTENSIONS = ALLOWED_IMAGE_EXTENSIONS | ALLOWED_VIDEO_EXTENSIONS
 MAX_IMAGE_SIZE = 10 * 1024 * 1024  # 10MB for images
@@ -92,6 +107,10 @@ async def upload_file(file: UploadFile = File(...), current_user: User = Depends
                 detail=f"File too large. Maximum size: {max_size / (1024 * 1024)}MB"
             )
 
+        # Security: magic-byte sniff so a renamed .exe can't ride in as .png
+        if not is_video and not _looks_like_image(file_content):
+            raise HTTPException(status_code=400, detail="File content does not match an image type")
+
         # Generate a unique filename
         filename = f"{uuid.uuid4()}{file_extension}"
 
@@ -106,5 +125,6 @@ async def upload_file(file: UploadFile = File(...), current_user: User = Depends
         return {"url": url, "media_type": media_type}
     except HTTPException:
         raise
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Could not upload file: {str(e)}")
+    except Exception:
+        # Never echo internal exception text to the client (leaks paths/stack info)
+        raise HTTPException(status_code=500, detail="Could not upload file")

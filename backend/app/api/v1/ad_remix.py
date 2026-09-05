@@ -57,7 +57,7 @@ async def deconstruct_ad_template(
         return blueprint
         
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Deconstruction failed: {str(e)}")
+        raise HTTPException(status_code=500, detail="Deconstruction failed")
 
 
 @router.post("/reconstruct", response_model=AdConcept)
@@ -118,7 +118,7 @@ async def reconstruct_ad_from_blueprint(
         return ad_concept
         
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Reconstruction failed: {str(e)}")
+        raise HTTPException(status_code=500, detail="Reconstruction failed")
 
 
 @router.get("/blueprints/{template_id}", response_model=AdBlueprint)

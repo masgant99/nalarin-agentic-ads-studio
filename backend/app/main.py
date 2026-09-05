@@ -54,11 +54,15 @@ async def add_security_headers(request: Request, call_next):
     return response
 
 # Trust proxy headers. In production this must be the actual reverse-proxy hop
-# (Caddy on 127.0.0.1), never "*" — a wildcard lets any client spoof
-# X-Forwarded-For/X-Forwarded-Proto and defeat IP-based rate limiting or HTTPS
-# enforcement further up the stack.
-trusted_proxies = os.getenv("TRUSTED_PROXIES", "127.0.0.1")
-app.add_middleware(ProxyHeadersMiddleware, trusted_hosts=[trusted_proxies] if trusted_proxies != "*" else ["*"])
+# (nginx/Caddy container on the docker network or 127.0.0.1), never "*" — a
+# wildcard lets any client spoof X-Forwarded-For/X-Forwarded-Proto and defeat
+# IP-based rate limiting or HTTPS enforcement further up the stack. The backend
+# port is only reachable from inside the compose network, so trusting the
+# private docker ranges is safe: only the proxy sets those headers.
+# ponytail: if the deploy ever moves to a shared network, pin the exact proxy IP.
+trusted_proxies = os.getenv("TRUSTED_PROXIES", "127.0.0.1,::1,172.16.0.0/12,192.168.0.0/16,10.0.0.0/8")
+_proxy_hosts = ["*"] if trusted_proxies == "*" else [h.strip() for h in trusted_proxies.split(",") if h.strip()]
+app.add_middleware(ProxyHeadersMiddleware, trusted_hosts=_proxy_hosts)
 
 # CORS origins from env var or defaults
 default_origins = [

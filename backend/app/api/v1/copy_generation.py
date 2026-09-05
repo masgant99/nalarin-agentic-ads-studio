@@ -127,10 +127,10 @@ Return ONLY valid JSON in this exact format:
     except json.JSONDecodeError as e:
         print(f"JSON Parse Error: {e}")
         print(f"Response text: {response_text}")
-        raise HTTPException(status_code=500, detail=f"Failed to parse AI response as JSON: {str(e)}")
+        raise HTTPException(status_code=500, detail="Failed to parse AI response as JSON")
     except Exception as e:
         print(f"Copy generation error: {e}")
-        raise HTTPException(status_code=500, detail=f"Copy generation failed: {str(e)}")
+        raise HTTPException(status_code=500, detail="Copy generation failed")
 
 @router.post("/regenerate-field")
 async def regenerate_field(request: FieldRegenerationRequest, current_user: User = Depends(get_current_active_user)):
@@ -171,4 +171,4 @@ Return ONLY the new {request.field} text, nothing else."""
         
     except Exception as e:
         print(f"Field regeneration error: {e}")
-        raise HTTPException(status_code=500, detail=f"Field regeneration failed: {str(e)}")
+        raise HTTPException(status_code=500, detail="Field regeneration failed")

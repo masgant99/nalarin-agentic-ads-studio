@@ -50,7 +50,7 @@ class FacebookService:
             return True
         except Exception as e:
             # Re-raise the exception so the caller knows what went wrong
-            raise Exception(f"Facebook API Init Error: {str(e)}")
+            raise Exception("Facebook API Init Error (check credentials/account access)")
 
 
     def get_ad_accounts(self):

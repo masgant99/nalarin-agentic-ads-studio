@@ -50,7 +50,7 @@ def get_facebook_service(
         if not service.api:
             service.initialize()
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail=f"Facebook service initialization failed: {type(e).__name__}")
     return service
 
 

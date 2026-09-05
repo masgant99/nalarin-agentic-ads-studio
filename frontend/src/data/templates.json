@@ -1,0 +1,53 @@
+[
+    {
+        "id": "skincare.png",
+        "src": "/templates/skincare.png",
+        "style": "Minimalist",
+        "description": "Clean, soft lighting, focus on product purity.",
+        "colorPalette": [
+            "#F5F5F5",
+            "#E0E0E0",
+            "#A1887F"
+        ],
+        "keyElements": [
+            "Bottle",
+            "Soft Shadows",
+            "Clean Background"
+        ],
+        "textPlacement": "Center"
+    },
+    {
+        "id": "sneaker.png",
+        "src": "/templates/sneaker.png",
+        "style": "Urban/Bold",
+        "description": "High energy, vibrant colors, dynamic composition.",
+        "colorPalette": [
+            "#FF5722",
+            "#212121",
+            "#FFC107"
+        ],
+        "keyElements": [
+            "Sneaker",
+            "Graffiti",
+            "Motion Blur"
+        ],
+        "textPlacement": "Bottom Left"
+    },
+    {
+        "id": "tech.png",
+        "src": "/templates/tech.png",
+        "style": "Futuristic",
+        "description": "Dark mode, neon accents, sleek lines.",
+        "colorPalette": [
+            "#000000",
+            "#00E5FF",
+            "#2979FF"
+        ],
+        "keyElements": [
+            "Gadget",
+            "Neon Glow",
+            "Grid Pattern"
+        ],
+        "textPlacement": "Top Right"
+    }
+]

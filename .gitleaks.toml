@@ -1,0 +1,23 @@
+# Gitleaks configuration
+title = "BreadWinner Secrets Scan"
+
+[allowlist]
+description = "Allowlist for known false positives"
+paths = [
+    '''venv/''',
+    '''node_modules/''',
+    '''\.env\.example''',
+    '''playwright-report/''',
+    '''htmlcov/''',
+]
+regexTarget = "match"
+
+# Custom rules can be added here
+# [[rules]]
+# id = "custom-api-key"
+# description = "Custom API key pattern"
+# regex = '''my-custom-key-[a-zA-Z0-9]{32}'''
+
+# Extend default rules
+[extend]
+useDefault = true

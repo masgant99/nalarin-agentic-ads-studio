@@ -1,0 +1,12 @@
+# Testing
+pytest==8.3.0
+pytest-cov==4.1.0
+pytest-asyncio==0.21.1
+httpx==0.25.1
+
+# Security scanning
+bandit==1.7.8
+pip-audit==2.7.3
+
+# Mocking
+responses==0.25.0

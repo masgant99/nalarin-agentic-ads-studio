@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #FFFAF0;
+  /* Warm Off-White */
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* BreadWinner Theme Overrides */
+@layer base {
+  body {
+    @apply text-amber-900 bg-[#FFFAF0];
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+  }
+
+  /* Override default focus rings to amber */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-amber-500 ring-offset-2;
+  }
+}
+
+/* Custom Scrollbar for that artisan feel */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FFFBEB;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D97706;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #B45309;
+}
+
+/* Toast Animations */
+@keyframes slide-in {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in {
+  animation: slide-in 0.3s ease-out;
+}
+
+/* Mobile heading scale (Sprint 8): page h1s across legacy pages were built
+   desktop-first at text-3xl/2xl. One media rule shrinks every page's h1/h2
+   on phones without touching 24+ JSX files. Component-level sm: classes
+   (Overview, TikTok, PerformanceTable) already handle their own scale and
+   keep working — this only adds a smaller floor under 640px. */
+@media (max-width: 639px) {
+  main h1 {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+  main h2 {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+}

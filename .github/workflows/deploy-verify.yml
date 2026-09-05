@@ -1,0 +1,75 @@
+name: Post-Deploy Verification
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to test'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+          - production
+          - staging
+  push:
+    branches: [main]
+
+jobs:
+  wait-for-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for Railway deploy
+        run: sleep 120  # Wait 2 min for Railway to rebuild
+
+  backend-health:
+    needs: wait-for-deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check backend health
+        run: |
+          echo "Checking backend health..."
+          for i in {1..10}; do
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" ${{ vars.BACKEND_URL }}/api/v1/docs)
+            if [ "$STATUS" = "200" ]; then
+              echo "Backend is healthy (HTTP 200)"
+              exit 0
+            fi
+            echo "Attempt $i: HTTP $STATUS - retrying in 10s..."
+            sleep 10
+          done
+          echo "Backend health check failed"
+          exit 1
+
+  e2e-smoke-tests:
+    needs: backend-health
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install agent-browser
+        run: |
+          npm install -g agent-browser
+          agent-browser install
+
+      - name: Run smoke tests
+        working-directory: frontend
+        run: bash tests/agent-browser/run-all.sh
+        env:
+          CI: true
+          BASE_URL: ${{ vars.FRONTEND_URL }}
+          TEST_EMAIL: ${{ secrets.TEST_EMAIL }}
+          TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
+
+  notify-failure:
+    needs: [backend-health, e2e-smoke-tests]
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify on failure
+        run: |
+          echo "::error::Post-deploy verification FAILED! Check the workflow logs."

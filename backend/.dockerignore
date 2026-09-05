@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.pytest_cache/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+server.log
+server_debug.log
+
+# Test
+test-results/
+.pytest_cache/
+
+# Uploads (don't include in image, use volumes)
+uploads/*
+!uploads/.gitkeep
+
+# Migration files (optional - include if you want them in image)
+# migrations/

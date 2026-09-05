@@ -1,0 +1,31 @@
+# Railway configuration for monorepo deployment
+
+[build]
+builder = "NIXPACKS"
+
+# Backend Service
+[[services]]
+name = "backend"
+source = "backend"
+
+[services.build]
+builder = "DOCKERFILE"
+dockerfilePath = "backend/Dockerfile"
+
+[services.deploy]
+startCommand = "uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+healthcheckPath = "/health"
+healthcheckTimeout = 100
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10
+
+# Frontend Service
+[[services]]
+name = "frontend"
+source = "frontend"
+
+[services.build]
+builder = "NIXPACKS"
+
+[services.deploy]
+startCommand = "npm run preview -- --host 0.0.0.0 --port $PORT"
